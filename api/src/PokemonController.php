@@ -73,6 +73,9 @@ class PokemonController
         break;
       case 'POST';
         $data = json_decode(file_get_contents('php://input'), true);
+        if (empty($data) && !empty($_POST)) {
+          $data = $_POST;
+        }
         $errors = $this->getValidationErrors($data);
         if (!empty($errors)) {
           http_response_code(422);

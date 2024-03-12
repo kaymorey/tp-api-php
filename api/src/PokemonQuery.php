@@ -7,16 +7,10 @@ class PokemonQuery
     $this->pdo = $pdo;
   }
 
-  public function getAll($id = null)
+  public function getAll()
   {
     $sql = 'SELECT * FROM pokemons';
-    if ($id) {
-      $query .= ' WHERE id = :id';
-    }
     $statement = $this->pdo->prepare($sql);
-    if ($id) {
-      $statement->bindParam(':id', $id);
-    }
     $statement->execute();
     
     return $statement->fetchAll(PDO::FETCH_ASSOC);
